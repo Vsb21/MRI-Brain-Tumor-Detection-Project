@@ -1,0 +1,76 @@
+
+========================================================================
+BENCHMARK SETUP
+========================================================================
+Test folder : /content/drive/MyDrive/archive (1)/Testing
+Hardware    : GPU (1 device)
+Models      : dilated_cnn.keras, resnet50.keras
+Test images : 1600   Classes: ['glioma', 'meningioma', 'notumor', 'pituitary']
+
+========================================================================
+MODEL: dilated_cnn.keras
+========================================================================
+Accuracy         : 59.56%
+Macro F1         : 0.5258
+ROC-AUC (OvR)    : 0.7529
+Misclassified    : 647 of 1600
+Latency (1 img)  : mean 21.6 ms | median 21.2 ms | p95 25.4 ms
+Throughput       : 560.2 images/s (batch of 32)
+Size             : 0.24 M parameters, 3.0 MB
+
+Per-class metrics:
+            Precision  Recall(Sens.)  Specificity      F1     AUC  Images
+glioma         0.9634         0.4600       0.9942  0.6227  0.8665     400
+meningioma     0.4000         0.9900       0.5050  0.5698  0.8242     400
+notumor        0.0000         0.0000       1.0000  0.0000  0.3329     400
+pituitary      0.8902         0.9325       0.9617  0.9109  0.9879     400
+
+Confusion matrix (rows = true class, columns = predicted class):
+            glioma  meningioma  notumor  pituitary
+glioma         184         203        0         13
+meningioma       0         396        0          4
+notumor          7         364        0         29
+pituitary        0          27        0        373
+
+========================================================================
+MODEL: resnet50.keras
+========================================================================
+Accuracy         : 64.00%
+Macro F1         : 0.5695
+ROC-AUC (OvR)    : 0.8070
+Misclassified    : 576 of 1600
+Latency (1 img)  : mean 237.0 ms | median 233.2 ms | p95 270.2 ms
+Throughput       : 125.0 images/s (batch of 32)
+Size             : 23.60 M parameters, 95.1 MB
+
+Per-class metrics:
+            Precision  Recall(Sens.)  Specificity      F1     AUC  Images
+glioma         0.8951         0.6825       0.9733  0.7745  0.9114     400
+meningioma     0.4220         0.9000       0.5892  0.5746  0.7322     400
+notumor        0.0000         0.0000       1.0000  0.0000  0.5881     400
+pituitary      0.8846         0.9775       0.9575  0.9287  0.9962     400
+
+Confusion matrix (rows = true class, columns = predicted class):
+            glioma  meningioma  notumor  pituitary
+glioma         273         118        0          9
+meningioma      14         360        0         26
+notumor         17         367        0         16
+pituitary        1           8        0        391
+
+========================================================================
+COMPARISON OF ALL MODELS
+========================================================================
+                     dilated_cnn.keras  resnet50.keras
+Accuracy                        0.5956          0.6400
+Macro Precision                 0.5634          0.5504
+Macro Recall                    0.5956          0.6400
+Macro F1                        0.5258          0.5695
+ROC-AUC (OvR)                   0.7529          0.8070
+Misclassified                 647.0000        576.0000
+Test images                  1600.0000       1600.0000
+Latency mean (ms)              21.6424        236.9689
+Latency median (ms)            21.1975        233.2456
+Latency p95 (ms)               25.4202        270.1512
+Throughput (img/s)            560.2371        124.9568
+Parameters (M)                  0.2428         23.5959
+File size (MB)                  2.9882         95.1107
